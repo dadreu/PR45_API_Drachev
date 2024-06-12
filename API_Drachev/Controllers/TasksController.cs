@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 using Task = API_Drachev.Model.Task;
 namespace API_Drachev.Controllers
 {
-    public class TasksController : Controller
-    {
-        [Route("api/TasksController")]
-        public class TaskContoller : Controller
+
+    [Route("api/TasksController")]
+    [ApiExplorerSettings(GroupName = "v1")]
+    public class TaskContoller : Controller
         {
+            
             [Route("List")]
             [HttpGet]
             [ProducesResponseType(typeof(List<Task>), 200)]
@@ -48,4 +49,4 @@ namespace API_Drachev.Controllers
             }
         }
     }
-}
+

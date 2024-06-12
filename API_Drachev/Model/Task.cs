@@ -9,28 +9,22 @@ namespace API_Drachev.Model
     public class Task
     {
         /// <summary>
-        /// Id
+        /// Код
         /// </summary>
         public int Id { get; set; }
-        /// <summary>
-        /// Название
-        /// </summary>
+        /// <summary> Название
         public string Name { get; set; }
-        /// <summary>
-        /// Приоритет
-        /// </summary>
+        /// <summary> Приоритет
+
         public string Priority { get; set; }
-        /// <summary>
-        /// Дата выполнения
-        /// </summary>
+        /// <summary> Дата выполнения
+
         public DateTime DateExecute { get; set; }
-        /// <summary>
-        /// Описание
-        /// </summary>
+        /// <summary> Описание
+
         public string Comment { get; set; }
-        /// <summary>
-        /// Выполнение
-        /// </summary>
+        /// <summary> Выполнение
+
         public bool Done { get; set; }
     }
 }
