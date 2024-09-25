@@ -121,7 +121,66 @@ namespace API_Drachev.Controllers
                 return StatusCode(500);
             }
         }
-
+        ///<summary>
+        ///Метод удаления задачи
+        /// </summary>
+        /// <param name="=task">Данные о задаче</param>
+        /// <returns>Статус выполнения запроса</returns>
+        ///<remarks>Данный метод удаляет задачу в базе данных</remarks>
+        [Route("Delete")]
+        [HttpDelete]
+        [ApiExplorerSettings(GroupName = "v4")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        public ActionResult Delete(int Id)
+        {
+            try
+            {
+                TaskContext taskContext = new TaskContext();
+                var delTask = taskContext.Tasks.SingleOrDefault(x => x.Id == Id);
+                if (delTask != null)
+                {
+                    taskContext.Tasks.Remove(delTask);
+                    taskContext.SaveChanges();
+                    return StatusCode(200);
+                }
+                else
+                {
+                    return StatusCode(400);
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500);
+            }
+        }
+        ///<summary>
+        ///Метод очистки задач
+        /// </summary>
+        /// <returns>Статус выполнения запроса</returns>
+        ///<remarks>Данный метод удаляет все задачи в базе данных</remarks>
+        [Route("DeleteAll")]
+        [HttpDelete]
+        [ApiExplorerSettings(GroupName = "v4")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        public ActionResult DeleteAll()
+        {
+            try
+            {
+                TaskContext taskContext = new TaskContext();
+                foreach (var task in taskContext.Tasks)
+                    taskContext.Remove(task);
+                taskContext.SaveChanges();
+                return StatusCode(200);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500);
+            }
+        }
     }
 
     }
