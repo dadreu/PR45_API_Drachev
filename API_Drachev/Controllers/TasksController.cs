@@ -13,12 +13,12 @@ namespace API_Drachev.Controllers
     public class TaskContoller : Controller
     {
 
-        [Route("List")]
-        [HttpGet]
-        [ProducesResponseType(typeof(List<Task>), 200)]
-        [ProducesResponseType(500)]
-        public ActionResult List()
-            {
+            [Route("List")]
+            [HttpGet]
+            [ProducesResponseType(typeof(List<Task>), 200)]
+            [ProducesResponseType(500)]
+            public ActionResult List()
+                {
                 try
                 {
                     IEnumerable<Task> Tasks = new TaskContext().Tasks;
@@ -40,6 +40,30 @@ namespace API_Drachev.Controllers
                 {
                     Task Tasks = new TaskContext().Tasks.Where(x => x.Id == Id).First();
                     return Json(Tasks);
+                }
+                catch (Exception exp)
+                {
+                    return StatusCode(500, exp.Message);
+                }
+            }
+            /// <summary>
+            /// Метод добавления задачи
+            /// </summary>
+            /// <param name="task"></param>
+            /// <returns></returns>
+            [Route("Add")]
+            [HttpPut]
+            [ApiExplorerSettings(GroupName = "v3")]
+            [ProducesResponseType(200)]
+            [ProducesResponseType(500)]
+            public ActionResult Add([FromForm]Task task)
+            {
+                try
+                {
+                    TaskContext tasksContext = new TaskContext();
+                    tasksContext.Tasks.Add(task);
+                    tasksContext.SaveChanges();
+                    return StatusCode(200);
                 }
                 catch (Exception exp)
                 {
