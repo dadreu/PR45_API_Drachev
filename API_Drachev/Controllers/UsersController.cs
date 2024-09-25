@@ -30,8 +30,7 @@ namespace API_Drachev.Controllers
                 return StatusCode(403);
             try
             {
-                Users User = new UsersContext().Users.Where(x => x.Login == Login &&
-                x.Password == Password).First;
+                Users User = new UsersContext().Users.First(x => x.Login == Login && x.Password == Password);
                 return Json(User);
             }
             catch (Exception ex)

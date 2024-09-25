@@ -15,9 +15,7 @@ namespace API_Drachev.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql("server=127.0.0.1; " +
-                "uid=root;" +
-                "pwd=;database=TaskManagers", 
+            optionsBuilder.UseMySql("server=localhost;port=3306;uid=root;database=TaskManagers", 
                 new MySqlServerVersion(new Version(8, 0, 11)));
         }
     }
